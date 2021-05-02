@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>mein Liste</title>
+</head>
+
+<body>
+
+    <form th:action="@{/sichtungen/meine/neu}" th:method="POST" th:object="${meinesichtungform}">
+        <label for="name">Benutzer</label><br>
+        <input type="text" th:field="*{name}"><br>
+        <label for="ort">Ort</label><br>
+        <input type="text" th:field="*{ort}"><br>
+        <label for="beschreibung">beschreibung</label><br>
+        <input type="text" th:field="*{beschreibung}"><br>
+        <label for="datum">Sichtung am</label><br>
+        <input type="date" th:field="*{datum}"><br>
+        <input type="submit" value="einloggen">
+    </form>
+
+</body>
+
+</html>

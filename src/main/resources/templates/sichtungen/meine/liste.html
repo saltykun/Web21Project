@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>17</title>
+</head>
+
+<body>
+
+    <table>
+        <tr th:each="sichtung : ${meinesichtung}">
+            <td th:text="${sichtung.datum}"></td>
+
+            <td th:text="${sichtung.name}"></td>
+            <td th:text="${sichtung.ort}"></td>
+            <td th:text="${sichtung.beschreibung}"></td>
+            <td th:text="${sichtung.datum}"></td>
+            <td> <a th:href="@{/sichtungen/meine/neu/{${sichtung.index}}}">[del]</a></td>
+            <td> <a th:href="@{/sichtungen/meine/neu/}">[edit]</a></td>
+        </tr>
+    </table>
+    <a href="/sichtungen/meine/neu">Neuer Eintrag</a>
+</body>
+
+</html>
