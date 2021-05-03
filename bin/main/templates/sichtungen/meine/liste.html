@@ -6,17 +6,17 @@
 </head>
 
 <body>
-
+    hallo
     <table>
-        <tr th:each="sichtung : ${meinesichtung}">
+        <tr th:each="sichtung,iStat : ${meinesichtung}">
             <td th:text="${sichtung.datum}"></td>
-
+            <td th:text="${iStat.index}"></td>
             <td th:text="${sichtung.name}"></td>
             <td th:text="${sichtung.ort}"></td>
             <td th:text="${sichtung.beschreibung}"></td>
             <td th:text="${sichtung.datum}"></td>
-            <td> <a th:href="@{/sichtungen/meine/neu/{${sichtung.index}}}">[del]</a></td>
-            <td> <a th:href="@{/sichtungen/meine/neu/}">[edit]</a></td>
+            <td> <a th:href="@{'/sichtungen/meine/'+${iStat.index}+'/del'}">[del]</a></td>
+            <td> <a th:href="@{'/sichtungen/meine/'+${iStat.index}}">[edit]</a></td>
         </tr>
     </table>
     <a href="/sichtungen/meine/neu">Neuer Eintrag</a>

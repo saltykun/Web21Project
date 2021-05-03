@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import org.slf4j.Logger;
@@ -52,6 +53,13 @@ public class SichtungController{
         return "sichtungen/meine/liste";
     }
 
-    
-    
+    @GetMapping("/sichtungen/meine/{zahl}/del")
+    public String del_get(@PathVariable int zahl,
+    @ModelAttribute("meinesichtung") ArrayList<Sichtung> list, 
+    Model m) {
+        logger.info("delete Zahl:"+zahl);
+        list.remove(zahl);
+        
+        return  "sichtungen/meine/liste";
+    }    
 }

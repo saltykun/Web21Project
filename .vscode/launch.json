@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjektApplication<projekt>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "de.hsrm.mi.web.projekt.ProjektApplication",
+            "projectName": "projekt",
+            "args": ""
+        }
+    ]
+}
