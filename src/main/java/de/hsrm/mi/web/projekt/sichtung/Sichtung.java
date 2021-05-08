@@ -49,6 +49,9 @@ public class Sichtung{
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
-
+    @Override
+    public String toString() {
+        return "Name: " + this.getName() + ", Ort: " + this.getOrt() + ", Datum: " + this.getDatum() + ", Beschreibung: " + this.getBeschreibung();
+    }
 
 }

@@ -11,39 +11,43 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-@SessionAttributes({"loggedinuserename"})
+@SessionAttributes({"loggedinusername"})
 public class LoginController{
     Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @ModelAttribute("loggedinuserename")
-    public void intiLoggesinusername(Model m){
+        public void intiLoggesinusername(Model m){
         m.addAttribute("loggedinuserename", "");
     }
 
     @GetMapping("/login")
-    public String login_get(){
-        return "/login";
+    public String login_get(Model m){
+        m.addAttribute("loggedinusername", "");
+        return "login";
     }
     
     @PostMapping("/login")
     public String login_post(Model m, 
     @RequestParam String username,
-    @RequestParam String passwort,
-    @ModelAttribute("loggedinuserename") String benutzername
+    @RequestParam String password
     ){
+        String benutzername;
+        if(username != ""){
         int lenght = username.length();
-        String rightpasswort = username+lenght;
+        String rightpassword = username + lenght;
 
-        if(passwort.equals(rightpasswort)){
+        if(password.equals(rightpassword)){
             benutzername = username;
-            return "redirect:" + "sichtungen/meine";
+            m.addAttribute("loggedinusername", benutzername);
+            return "redirect:/sichtung/meine";
         }else{
             benutzername ="";
-            String ausgabe = "Für "+username+" sollte das Passwort "+rightpasswort+" sein.";
+            String ausgabe = "Für "+username+" sollte das Passwort "+rightpassword+" sein.";
+            m.addAttribute("loggedinusername", "");
             m.addAttribute("Fehlermeldung", ausgabe);
         }
-       
-        return"/login";
+        }
+        return"login";
     }
     
 

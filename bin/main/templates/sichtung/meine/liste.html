@@ -8,18 +8,18 @@
 <body>
     hallo
     <table>
-        <tr th:each="sichtung,iStat : ${meinesichtung}">
+        <tr th:each="sichtung,iStat : ${meinesichtungen}">
             <td th:text="${sichtung.datum}"></td>
             <td th:text="${iStat.index}"></td>
             <td th:text="${sichtung.name}"></td>
             <td th:text="${sichtung.ort}"></td>
             <td th:text="${sichtung.beschreibung}"></td>
             <td th:text="${sichtung.datum}"></td>
-            <td> <a th:href="@{'/sichtungen/meine/'+${iStat.index}+'/del'}">[del]</a></td>
-            <td> <a th:href="@{'/sichtungen/meine/'+${iStat.index}}">[edit]</a></td>
+            <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}+'/del'}">[del]</a></td>
+            <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}}">[edit]</a></td>
         </tr>
     </table>
-    <a href="/sichtungen/meine/neu">Neuer Eintrag</a>
+    <a href="/sichtung/meine/neu">Neuer Eintrag</a>
 </body>
 
 </html>
