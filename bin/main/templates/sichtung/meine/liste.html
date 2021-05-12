@@ -3,18 +3,30 @@
 
 <head>
     <title>17</title>
+    <meta charset="utf-8">
 </head>
 
 <body>
-    hallo
+    <h1 th:text="#{header.intro}"></h1>
+    <a th:href="@{?sprache=de}">Deutsch</a>
+    <a th:href="@{?sprache=en}">Englisch</a>
     <table>
+        <thead>
+            <tr>
+                <td th:text="#{form.datum}">datum</td>
+                <td th:text="#{form.name}">name</td>
+                <td th:text="#{form.ort}">ort</td>
+                <td th:text="#{form.beschreibung}">beschreibung</td>
+
+
+            </tr>
+        </thead>
+
         <tr th:each="sichtung,iStat : ${meinesichtungen}">
             <td th:text="${sichtung.datum}"></td>
-            <td th:text="${iStat.index}"></td>
             <td th:text="${sichtung.name}"></td>
             <td th:text="${sichtung.ort}"></td>
             <td th:text="${sichtung.beschreibung}"></td>
-            <td th:text="${sichtung.datum}"></td>
             <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}+'/del'}">[del]</a></td>
             <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}}">[edit]</a></td>
         </tr>

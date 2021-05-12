@@ -1,0 +1,11 @@
+input {
+    border-width: 1px;
+}
+
+.error {
+    border-color: red;
+}
+
+.errortxt {
+    color: red;
+}

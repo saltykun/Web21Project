@@ -3,13 +3,15 @@
 
 <head>
     <title>login Page</title>
+    <meta charset="utf-8">
+
 </head>
 
 <body>
     <form method="POST">
-        <label for="username">username:</label>
+        <label for="username" th:text="#{login.benutzername}">username:</label>
         <input type="text" name="username"><br>
-        <label for="password">passwort:</label>
+        <label for="password" th:text="#{login.password}">passwort:</label>
         <input type="text" name="password"><br>
         <input action="/login" type="submit" value="einloggen">
     </form>

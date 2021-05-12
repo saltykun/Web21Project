@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +33,9 @@ public class SichtungController{
     
     @GetMapping("/sichtung/meine")
     public String sichtungMeineListe_post(Model m){
-        //list.add(new Sichtung("abx", "frankfur", LocalDate.now(), "17"));      
-        
+        //list.add(new Sichtung("abx", "frankfur", LocalDate.now(), "17"));              
         return "sichtung/meine/liste";
+
     }
     
     @GetMapping("/sichtung/meine/neu")
@@ -43,11 +45,18 @@ public class SichtungController{
     }
 
     @PostMapping("/sichtung/meine/neu")
-    public String sichtungMeineNeu_post(Model m, @ModelAttribute("meinesichtungform")
-    Sichtung sichtung,@ModelAttribute("meinesichtungen") List<Sichtung> list) {
-        list.add(sichtung);
-        m.addAttribute("meinesichtungform", list);
-        return "redirect:/sichtung/meine";
+    public String sichtungMeineNeu_post(Model m, @Valid @ModelAttribute("meinesichtungform")Sichtung sichtung, 
+    BindingResult sichtungResults, @ModelAttribute("meinesichtungen") List<Sichtung> list) {
+
+
+        if(sichtungResults.hasErrors()){
+            logger.info("hat errors");
+            return "sichtung/meine/bearbeiten";
+        }else{
+            list.add(sichtung);
+            m.addAttribute("meinesichtungform", list);
+            return "redirect:/sichtung/meine";
+        }
     }
     @RequestMapping(params = "cancel", method = RequestMethod.POST)
     public String cancelUpdateUser(HttpServletRequest request) {
