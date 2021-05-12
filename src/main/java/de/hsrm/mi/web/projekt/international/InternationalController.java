@@ -26,6 +26,8 @@ public class InternationalController {
     }
 
 
+
+    //https://phrase.com/blog/posts/spring-boot-internationalization/
     @Bean("messageSource")
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

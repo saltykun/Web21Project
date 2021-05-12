@@ -31,7 +31,7 @@
             <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}}">[edit]</a></td>
         </tr>
     </table>
-    <a href="/sichtung/meine/neu">Neuer Eintrag</a>
+    <a href="/sichtung/meine/neu" th:text="#{button.neuerEintrag}">neuerEintrag</a>
 </body>
 
 </html>

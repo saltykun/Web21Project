@@ -22,8 +22,8 @@
         <label for="datum" th:text="#{form.datum}">Sichtung am</label><br>
         <input type="date" th:field="*{datum}" th:errorclass="error"><br>
         <p th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="errortxt">incorrect datum</p>
-        <a href=".">cancel </a>
-        <input type="submit" value="submit" name="submit">
+        <a href="." th:text="#{button.cancel}">cancel </a>
+        <input type="submit" th:value="#{button.submit}" name="submit">
 
     </form>
     <p></p>

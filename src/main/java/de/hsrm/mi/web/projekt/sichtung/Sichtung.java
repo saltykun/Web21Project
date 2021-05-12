@@ -17,7 +17,7 @@ public class Sichtung{
     
     @Valid
     @Size(min=3, message = "{valid.name(${min})}")
-    @NotBlank(message = "{valid.leer}")
+    @NotBlank(message = "{validleer}")
     private String name;
     
     @Valid

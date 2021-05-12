@@ -10,7 +10,7 @@ public class SiebzehnValidator implements ConstraintValidator<Siebzehnhaft, Stri
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if(value == null) return false;
 
-        if(value.toLowerCase().contains("17") || value.toLowerCase().contains("siebzehn"))return true;
+        if(value.toLowerCase().contains("17") || value.toLowerCase().contains("{siebzehn.zahl}"))return true;
 
         return false;
     }
