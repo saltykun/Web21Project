@@ -23,7 +23,7 @@
         <input type="date" th:field="*{datum}" th:errorclass="error"><br>
         <p th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="errortxt">incorrect datum</p>
         <a href="." th:text="#{button.cancel}">cancel </a>
-        <input type="submit" th:value="#{button.submit}" name="submit">
+        <input type="submit" th:value="#{button.submit}" name="sub">
 
     </form>
     <p></p>

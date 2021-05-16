@@ -50,7 +50,6 @@ public class SichtungController{
 
 
         if(sichtungResults.hasErrors()){
-            logger.info("hat errors");
             return "sichtung/meine/bearbeiten";
         }else{
             list.add(sichtung);
@@ -58,6 +57,7 @@ public class SichtungController{
             return "redirect:/sichtung/meine";
         }
     }
+    
     @RequestMapping(params = "cancel", method = RequestMethod.POST)
     public String cancelUpdateUser(HttpServletRequest request) {
     return "redirect:/meine/liste";

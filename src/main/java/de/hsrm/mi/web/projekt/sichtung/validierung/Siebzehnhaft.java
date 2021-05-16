@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Documented
 
 public @interface Siebzehnhaft {
-    String message() default "es muss eine Siebzehn oder 17 enthalten sein";
+    String message() default "{valid.siebzehn}";
     // optimale Zusatzinfos 
     Class<? extends Payload>[] payload() default { };
     // Zuordnung zu Validierungsgruppen?

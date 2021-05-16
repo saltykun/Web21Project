@@ -1,6 +1,6 @@
 package de.hsrm.mi.web.projekt.international;
 
-import java.util.Locale;
+//import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,10 @@ public class InternationalConfiguration implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver resolver = new SessionLocaleResolver(); 
-        // Optional: Browser-Präferenz übersteuern
-        resolver.setDefaultLocale(Locale.GERMANY);
+        //Optional: Browser-Präferenz übersteuern
+        //resolver.setDefaultLocale(Locale.ENGLISH);
+        //resolver.setDefaultLocale(Locale.GERMAN);
+
         return resolver;
     }
 

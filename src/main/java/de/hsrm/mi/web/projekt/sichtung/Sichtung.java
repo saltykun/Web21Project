@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+//import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,23 +16,23 @@ import de.hsrm.mi.web.projekt.sichtung.validierung.Siebzehnhaft;
 public class Sichtung{
     
     @Valid
-    @Size(min=3, message = "{valid.name(${min})}")
-    @NotBlank(message = "{validleer}")
+    @Size(min=3, message = "{valid.name}")
+    @NotBlank(message = "{valid.leer}")
     private String name;
     
     @Valid
-    @Size(min=3, message = "{valid.ort(${min})}")
+    @Size(min=3, message = "{valid.ort}")
     @NotBlank(message = "{valid.leer}")
     private String ort;
     
     @Valid
     @DateTimeFormat(iso = ISO.DATE)
-    @NotNull(message = "{valid.leer}") @PastOrPresent(message = "{valid.date}")
+    @NotNull(message = "{valid.leer}") //@PastOrPresent(message = "{valid.date}")
     private LocalDate datum;
 
     @Valid
     @Siebzehnhaft
-    @Size(min=3, max=80, message = "{valid.beschreibung(${min},${max})}")
+    @Size(max=80, message = "{valid.beschreibung}")
     @NotBlank(message = "{valid.leer}")
     private String beschreibung;
 
