@@ -1,17 +1,25 @@
 package de.hsrm.mi.web.projekt.foto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Foto {
-    long id;
-    long version;
+    @Id // falls was noch funktioniert mal das andere Id importieren.
+    @GeneratedValue
+    private long id;
     
+    private long version;
+
     @Valid
     @NotEmpty
     private String mimetype;
@@ -23,19 +31,26 @@ public class Foto {
     
     @Valid
     @PastOrPresent
-    private LocalDate zeitstempel;
+    private LocalDateTime zeitstempel;
 
-    private double geoleange;
+    private double geolaenge;
     private double geobreite;
 
-    private byte[] fotodaten;
+    @Lob private byte[] fotodaten;
 
     public Foto(){
-        zeitstempel = LocalDate.MIN;
+        zeitstempel = LocalDateTime.MIN;
         mimetype ="";
         dateiname="";
         ort = "";
 
+    }
+
+    public long getId() {
+        return id;
+    }
+    public long getVersion() {
+        return version;
     }
 
     public String getDateiname() {
@@ -47,8 +62,8 @@ public class Foto {
     public double getGeobreite() {
         return geobreite;
     }
-    public double getGeoleange() {
-        return geoleange;
+    public double getGeolaenge() {
+        return geolaenge;
     }
     public String getMimetype() {
         return mimetype;
@@ -56,7 +71,7 @@ public class Foto {
     public String getOrt() {
         return ort;
     }
-    public LocalDate getZeitstempel() {
+    public LocalDateTime getZeitstempel() {
         return zeitstempel;
     }
     public void setDateiname(String dateiname) {
@@ -68,8 +83,8 @@ public class Foto {
     public void setGeobreite(double geobreite) {
         this.geobreite = geobreite;
     }
-    public void setGeoleange(double geoleange) {
-        this.geoleange = geoleange;
+    public void setGeolaenge(double geoleange) {
+        this.geolaenge = geoleange;
     }
     public void setMimetype(String mimetype) {
         this.mimetype = mimetype;
@@ -77,7 +92,7 @@ public class Foto {
     public void setOrt(String ort) {
         this.ort = ort;
     }
-    public void setZeitstempel(LocalDate zeitstempel) {
+    public void setZeitstempel(LocalDateTime zeitstempel) {
         this.zeitstempel = zeitstempel;
     }
     
@@ -85,7 +100,7 @@ public class Foto {
     @Override
     public String toString() {
         return "Foto [dateiname=" + dateiname + ", fotodaten=" + Arrays.toString(fotodaten) + ", geobreite=" + geobreite
-                + ", geoleange=" + geoleange + ", mimetype=" + mimetype + ", ort=" + ort + ", zeitstempel="
+                + ", geoleange=" + geolaenge + ", mimetype=" + mimetype + ", ort=" + ort + ", zeitstempel="
                 + zeitstempel + "]";
     }
 
@@ -98,7 +113,7 @@ public class Foto {
         long temp;
         temp = Double.doubleToLongBits(geobreite);
         result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(geoleange);
+        temp = Double.doubleToLongBits(geolaenge);
         result = prime * result + (int) (temp ^ (temp >>> 32));
         result = prime * result + ((mimetype == null) ? 0 : mimetype.hashCode());
         result = prime * result + ((ort == null) ? 0 : ort.hashCode());
@@ -124,7 +139,7 @@ public class Foto {
             return false;
         if (Double.doubleToLongBits(geobreite) != Double.doubleToLongBits(other.geobreite))
             return false;
-        if (Double.doubleToLongBits(geoleange) != Double.doubleToLongBits(other.geoleange))
+        if (Double.doubleToLongBits(geolaenge) != Double.doubleToLongBits(other.geolaenge))
             return false;
         if (mimetype == null) {
             if (other.mimetype != null)

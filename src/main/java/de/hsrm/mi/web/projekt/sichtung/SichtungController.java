@@ -32,20 +32,20 @@ public class SichtungController{
     }
     
     @GetMapping("/sichtung/meine")
-    public String sichtungMeineListe_post(Model m){
+    public String sichtungMeineListePost(Model m){
         //list.add(new Sichtung("abx", "frankfur", LocalDate.now(), "17"));              
         return "sichtung/meine/liste";
 
     }
     
     @GetMapping("/sichtung/meine/neu")
-    public String sichtungMeineNeu_get(Model m){      
+    public String sichtungMeineNeuGet(Model m){      
         m.addAttribute("meinesichtungform", new Sichtung());
         return "sichtung/meine/bearbeiten";
     }
 
     @PostMapping("/sichtung/meine/neu")
-    public String sichtungMeineNeu_post(Model m, @Valid @ModelAttribute("meinesichtungform")Sichtung sichtung, 
+    public String sichtungMeineNeuPost(Model m, @Valid @ModelAttribute("meinesichtungform")Sichtung sichtung, 
     BindingResult sichtungResults, @ModelAttribute("meinesichtungen") List<Sichtung> list) {
 
 
@@ -64,7 +64,7 @@ public class SichtungController{
 }
 
     @GetMapping("/sichtung/meine/{zahl}/del")
-    public String del_get(@PathVariable int zahl,
+    public String delGet(@PathVariable int zahl,
     @ModelAttribute("meinesichtungen") List<Sichtung> list, 
     Model m) {
         logger.info("delete Zahl:"+zahl);
@@ -73,7 +73,7 @@ public class SichtungController{
         return  "redirect:/sichtung/meine";
     }
     @GetMapping("/sichtung/meine/{zahl}")
-    public String edit_get(@PathVariable int zahl,
+    public String editGet(@PathVariable int zahl,
     @ModelAttribute("meinesichtungen") List<Sichtung> list, 
     Model m) {
         m.addAttribute("meinesichtungform", list.get(zahl));
