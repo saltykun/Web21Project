@@ -15,6 +15,7 @@ public class FotoServiceImpl implements FotoService{
    @Autowired FotoBearbeitungService fbservice;
    @Autowired FotoRepository fRepository;
 
+   
     @Override
     public Foto fotoAbspeichern(Foto foto) {
         fbservice.aktualisiereMetadaten(foto);
