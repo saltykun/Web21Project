@@ -1,18 +1,23 @@
 package de.hsrm.mi.web.projekt.foto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 @Entity
+
 public class Foto {
     @Id // falls was noch funktioniert mal das andere Id importieren.
     @GeneratedValue
@@ -38,12 +43,23 @@ public class Foto {
 
     @Lob private byte[] fotodaten;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Kommentar> kommentare = new ArrayList<>();
+
     public Foto(){
         zeitstempel = LocalDateTime.MIN;
         mimetype ="";
         dateiname="";
         ort = "";
+    
+    }
 
+    public void addKommentar(Kommentar kommentar){
+        kommentare.add(kommentar);
+    }
+
+    public List<Kommentar> getKommentare() {
+        return kommentare;
     }
 
     public long getId() {

@@ -11,9 +11,9 @@
     <form method="POST">
         <label for="username" th:text="#{login.benutzername}">username:</label>
         <input type="text" name="username"><br>
-        <label for="password" th:text="#{login.passwort}">password:</label>
+        <label for="password" th:text="#{login.passwort}">passwort:</label>
         <input type="text" name="password"><br>
-        <input action="/login" type="submit" value="einloggen">
+        <input action="/fotologin" type="submit" value="einloggen">
     </form>
     <p th:text="${Fehlermeldung}"></p>
 </body>

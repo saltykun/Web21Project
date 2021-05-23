@@ -10,6 +10,8 @@ public interface FotoService {
     public Foto fotoAbspeichern(Foto foto);
     public Optional<Foto> fotoAbfragenNachId(Long id);
     public List<Foto> alleFotosNachZeitstempelSortiert(); 
-    //public List<Foto> alleFotosNachZeitstempelSortiert(LocalDateTime time); 
     public void loescheFoto(Long id);
+    public void fotoKommentieren(long id, String autor, String kommentar);
+    public List<Kommentar> alleKommentareFuerFoto(long fotoid);
+    public void fotoKommentarLoeschen(long fotoid, long kid);
 }
