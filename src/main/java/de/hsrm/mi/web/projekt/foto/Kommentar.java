@@ -31,7 +31,9 @@ public class Kommentar {
         zeitpunkt = LocalDateTime.now();
     }
 
-
+    public void setId(long id) {
+        this.id = id;
+    }
     public long getId() {
         return id;
     }
@@ -48,7 +50,7 @@ public class Kommentar {
     public LocalDateTime getZeitpunkt() {
         return zeitpunkt;
     }
-    public void autor(String autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
     public void setText(String text) {

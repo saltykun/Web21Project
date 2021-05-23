@@ -20,13 +20,13 @@ public class FotoLoginController{
         m.addAttribute("loggedinuserename", "");
     }
 
-    @GetMapping("/foto/login")
+    @GetMapping("/fotologin")
     public String login_get(Model m){
         m.addAttribute("loggedinusername", "");
         return "foto/login";
     }
     
-    @PostMapping("/foto/login")
+    @PostMapping("/fotologin")
     public String login_post(Model m, 
     @RequestParam String username,
     @RequestParam String password

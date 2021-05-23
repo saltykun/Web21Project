@@ -8,12 +8,12 @@
 </head>
 
 <body>
-    <form method="POST">
+    <form th:action="@{/fotologin}" method="POST">
         <label for="username" th:text="#{login.benutzername}">username:</label>
         <input type="text" name="username"><br>
         <label for="password" th:text="#{login.passwort}">passwort:</label>
         <input type="text" name="password"><br>
-        <input action="/fotologin" type="submit" value="einloggen">
+        <input type="submit" value="einloggen">
     </form>
     <p th:text="${Fehlermeldung}"></p>
 </body>
