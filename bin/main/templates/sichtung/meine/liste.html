@@ -3,35 +3,47 @@
 
 <head>
     <title>17</title>
+    <link rel="stylesheet" href="errors.css" th:href="@{/errors.css}">
     <meta charset="utf-8">
 </head>
 
 <body>
-    <h1 th:text="#{header.intro}"></h1>
-    <a th:href="@{?sprache=de}">Deutsch</a>
-    <a th:href="@{?sprache=en}">Englisch</a>
-    <table>
-        <thead>
-            <tr>
-                <td th:text="#{form.datum}">datum</td>
-                <td th:text="#{form.name}">name</td>
-                <td th:text="#{form.ort}">ort</td>
-                <td th:text="#{form.beschreibung}">beschreibung</td>
+    <div class="header">
+        <h1 class="headerText" th:text="#{header.intro}"></h1>
+        <div class="sprache">
+            <a class="btn btnsecondary btnlarge" th:href="@{?sprache=de}">Deutsch</a>
+            <a class="btn btnsecondary btnlarge" th:href="@{?sprache=en}">Englisch</a>
+        </div>
+    </div>
+    <div class="content">
 
+        <div class="spacing">
 
-            </tr>
-        </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <td th:text="#{form.datum}">datum</td>
+                        <td th:text="#{form.name}">name</td>
+                        <td th:text="#{form.ort}">ort</td>
+                        <td th:text="#{form.beschreibung}">beschreibung</td>
+                        <td></td>
+                        <td></td>
 
-        <tr th:each="sichtung,iStat : ${meinesichtungen}">
-            <td th:text="${sichtung.datum}"></td>
-            <td th:text="${sichtung.name}"></td>
-            <td th:text="${sichtung.ort}"></td>
-            <td th:text="${sichtung.beschreibung}"></td>
-            <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}+'/del'}">[del]</a></td>
-            <td> <a th:href="@{'/sichtung/meine/'+${iStat.index}}">[edit]</a></td>
-        </tr>
-    </table>
-    <a href="/sichtung/meine/neu" th:text="#{button.neuerEintrag}">neuerEintrag</a>
+                    </tr>
+                </thead>
+
+                <tr th:each="sichtung,iStat : ${meinesichtungen}">
+                    <td th:text="${sichtung.datum}"></td>
+                    <td th:text="${sichtung.name}"></td>
+                    <td th:text="${sichtung.ort}"></td>
+                    <td th:text="${sichtung.beschreibung}"></td>
+                    <td> <a class="btn btnprimary btnsmall" th:href="@{'/sichtung/meine/'+${iStat.index}+'/del'}">del</a></td>
+                    <td> <a class="btn btnprimary btnsmall" th:href="@{'/sichtung/meine/'+${iStat.index}}">edit</a></td>
+                </tr>
+            </table>
+        </div>
+        <a class="btn btnprimary btnlarge" href="/sichtung/meine/neu" th:text="#{button.neuerEintrag}">neuerEintrag</a>
+    </div>
 </body>
 
 </html>

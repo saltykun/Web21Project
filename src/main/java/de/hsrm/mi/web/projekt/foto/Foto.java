@@ -16,8 +16,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Foto {
     @Id // falls was noch funktioniert mal das andere Id importieren.
     @GeneratedValue
@@ -41,8 +43,10 @@ public class Foto {
     private double geolaenge;
     private double geobreite;
 
+    @JsonIgnore
     @Lob private byte[] fotodaten;
 
+    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(cascade = CascadeType.ALL)
     private List<Kommentar> kommentare = new ArrayList<>();
 
@@ -61,6 +65,19 @@ public class Foto {
     public List<Kommentar> getKommentare() {
         return kommentare;
     }
+    public void removeKommentar(Kommentar kommentar){
+        kommentare.remove(kommentar);
+    }
+
+    public Kommentar findKommentarById(long id) {
+        for (Kommentar kommentar : kommentare) {
+            if (kommentar.getId() == id) {
+                return kommentar;
+            }
+        }
+        return null;
+    }
+
 
     public long getId() {
         return id;

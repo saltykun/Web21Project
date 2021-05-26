@@ -13,7 +13,7 @@ public class AdressServiceImpl implements AdressService{
     public Optional<String> findeAdresse(double geoBreite, double geolaenge) {
         String fooResourceUrl = "https://nominatim.openstreetmap.org/reverse?lat="+geoBreite+"&lon="+geolaenge+"&format=json";
         Adresse adresse = restTemplate.getForObject(fooResourceUrl, Adresse.class);
-        if(adresse != null){
+        if(adresse.getDisplay_name() != null){
             return Optional.of(adresse.getDisplay_name());
         }else{
             return Optional.empty();

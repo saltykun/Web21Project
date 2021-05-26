@@ -9,24 +9,38 @@
 
 <body>
 
-    <form th:action="@{/sichtung/meine/neu}" th:method="POST" th:object="${meinesichtungform}">
-        <label for="name" th:text="#{form.name}"></label><br>
-        <input type="text" th:field="*{name}" th:errorclass="error"><br>
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errortxt">incorrect name</p>
-        <label for="ort" th:text="#{form.ort}">Ort</label><br>
-        <input type="text" th:field="*{ort}" th:errorclass="error"><br>
-        <p th:if="${#fields.hasErrors('ort')}" th:errors="*{ort}" class="errortxt">incorrect ort</p>
-        <label for="beschreibung" th:text="#{form.beschreibung}">beschreibung</label><br>
-        <input type="text" th:field="*{beschreibung}" th:errorclass="error"><br>
-        <p th:if="${#fields.hasErrors('beschreibung')}" th:errors="*{beschreibung}" class="errortxt">incorrect beschreibung</p>
-        <label for="datum" th:text="#{form.datum}">Sichtung am</label><br>
-        <input type="date" th:field="*{datum}" th:errorclass="error"><br>
-        <p th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="errortxt">incorrect datum</p>
-        <a href="." th:text="#{button.cancel}">cancel </a>
-        <input type="submit" th:value="#{button.submit}" name="sub">
+    <div class="header">
+        <h1 class="headerText" th:text="#{header.intro}"></h1>
+        <div class="sprache">
+            <a class="btn btnsecondary btnlarge" th:href="@{?sprache=de}">Deutsch</a>
+            <a class="btn btnsecondary btnlarge" th:href="@{?sprache=en}">Englisch</a>
+        </div>
+    </div>
+    <div class="content">
 
-    </form>
-    <p></p>
+        <div class="spacing">
+            <div class="sichtungsform">
+
+                <form th:action="@{/sichtung/meine/neu}" th:method="POST" th:object="${meinesichtungform}">
+                    <label for="name" th:text="#{form.name}"></label><br>
+                    <input type="text" th:field="*{name}" th:errorclass="error"><br>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errortxt">incorrect name</p>
+                    <label for="ort" th:text="#{form.ort}">Ort</label><br>
+                    <input type="text" th:field="*{ort}" th:errorclass="error"><br>
+                    <p th:if="${#fields.hasErrors('ort')}" th:errors="*{ort}" class="errortxt">incorrect ort</p>
+                    <label for="beschreibung" th:text="#{form.beschreibung}">beschreibung</label><br>
+                    <input type="text" th:field="*{beschreibung}" th:errorclass="error"><br>
+                    <p th:if="${#fields.hasErrors('beschreibung')}" th:errors="*{beschreibung}" class="errortxt">incorrect beschreibung</p>
+                    <label for="datum" th:text="#{form.datum}">Sichtung am</label><br>
+                    <input type="date" th:field="*{datum}" th:errorclass="error"><br>
+                    <p th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="errortxt">incorrect datum</p>
+                    <a class="btn btnprimary btnlarge" href="." th:text="#{button.cancel}">cancel </a>
+                    <input class="btn btnprimary btnlarge" type="submit" th:value="#{button.submit}" name="sub">
+
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

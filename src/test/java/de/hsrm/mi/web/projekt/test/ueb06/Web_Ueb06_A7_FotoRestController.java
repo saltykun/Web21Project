@@ -121,8 +121,8 @@ public class Web_Ueb06_A7_FotoRestController {
          .andExpect(jsonPath("$[2].geobreite", is(fotoliste.get(2).getGeobreite())))
          .andExpect(jsonPath("$[2].fotodaten").doesNotExist())
 
-         .andExpect(jsonPath("$[1].kommentare[0]", is(fotoliste.get(1).getKommentare().get(0).getId()), Long.class))
-         .andExpect(jsonPath("$[3].kommentare[1]", is(fotoliste.get(3).getKommentare().get(1).getId()), Long.class));
+        .andExpect(jsonPath("$[1].kommentare[0]", is(fotoliste.get(1).getKommentare().get(0).getId()), Long.class))
+        .andExpect(jsonPath("$[3].kommentare[1]", is(fotoliste.get(3).getKommentare().get(1).getId()), Long.class));
 
     }
 

@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.hsrm.mi.web.projekt.foto.Foto;
 //import de.hsrm.mi.web.projekt.foto.Foto;
 //import de.hsrm.mi.web.projekt.foto.FotoRepository;
 import de.hsrm.mi.web.projekt.foto.FotoService;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/foto")
+@RequestMapping("/api/foto")
 public class FotoRestController {
     
     private static final Logger logger = LoggerFactory.getLogger(FotoRestController.class);
@@ -30,27 +31,25 @@ public class FotoRestController {
     @Autowired
     FotoService fService;
 
-    @GetMapping(value="/api/foto",produces=MediaType.APPLICATION_JSON_VALUE) 
-    public String getAllFotos()throws JSONException {
-        logger.info("hallo---------------------------");
-        //return fService.alleFotosNachZeitstempelSortiert();
-        return "hallo";
+    @GetMapping(value="",produces=MediaType.APPLICATION_JSON_VALUE) 
+    public List<Foto> getAllFotos()throws JSONException {
+        return fService.alleFotosNachZeitstempelSortiert();
     }
 
-    @DeleteMapping("/api/foto/{id}")
-    public void delFotoByID(@PathVariable long id){
+    @DeleteMapping("/{id}")
+    public void delFotoByID(@PathVariable long id)throws JSONException{
         fService.loescheFoto(id);
     }
 
-    @GetMapping(value="/api/foto/{id}/kommentar", produces=MediaType.APPLICATION_JSON_VALUE)
-    public List<Kommentar> getAllKommentsFromFotowithID(@PathVariable long id){
+    @GetMapping(value="/{id}/kommentar", produces=MediaType.APPLICATION_JSON_VALUE)
+    public List<Kommentar> getAllKommentsFromFotowithID(@PathVariable long id)throws JSONException {
         
         return fService.alleKommentareFuerFoto(id);
     }
 
-    @DeleteMapping("/api/foto/{id}/kommentar/{kid}")
+    @DeleteMapping("/{id}/kommentar/{kid}")
     public void delKommentarFromFotoIDwithKID(@PathVariable long id,
-    @PathVariable long kid){
+    @PathVariable long kid)throws JSONException{
         fService.fotoKommentarLoeschen(id, kid);
     }
 

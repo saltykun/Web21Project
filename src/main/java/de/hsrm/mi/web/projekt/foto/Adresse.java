@@ -1,7 +1,9 @@
 package de.hsrm.mi.web.projekt.foto;
 
 public class Adresse {
+    
     private String display_name;
+    
     public String getDisplay_name() {
         return display_name;
     }

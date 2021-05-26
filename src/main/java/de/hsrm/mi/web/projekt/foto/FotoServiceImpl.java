@@ -52,7 +52,7 @@ public class FotoServiceImpl implements FotoService{
 
     @Override
     public void fotoKommentieren(long id, String autor, String kommentar)throws NoSuchElementException {
-        Foto foto = fRepository.getOne(id);
+        Foto foto = fRepository.findById(id).get();
         Kommentar neuesKommentar = new Kommentar(autor,kommentar);
         foto.addKommentar(neuesKommentar);
         fRepository.save(foto);
@@ -67,7 +67,18 @@ public class FotoServiceImpl implements FotoService{
     @Override
     public void fotoKommentarLoeschen(long fotoid, long kid) throws NoSuchElementException{
         
-        fRepository.getOne(fotoid).getKommentare().remove((int)kid);
+        Foto foto = fRepository.findById(fotoid).get(); 
+    
+        if(foto.findKommentarById(kid) == null){
+            throw new NoSuchElementException();
+        }else{
+            foto.removeKommentar(foto.findKommentarById(kid));
+        } 
+
+        
+        
+        
+        //fRepository.getOne(fotoid).getKommentare().remove((int)kid);
         
     }
 
