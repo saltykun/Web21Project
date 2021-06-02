@@ -1,0 +1,50 @@
+GET http://localhost:8080/rest
+
+###
+GET http://localhost:8080/rest/spruches
+
+###
+
+POST http://localhost:8080/rest/spruches 
+
+{"name" :"pablo", "text" :"hallo", "anspruch" : 1}
+
+###
+
+DELETE http://localhost:8080/rest/spruches/7
+
+###
+
+GET http://localhost:8080/rest/spruches/1
+
+###
+
+PUT http://localhost:8080/rest/spruches/1
+
+{"anspruch" : 18}
+
+###
+
+GET http://localhost:8080/rest/spruches 
+?page=1&size=4&sort=id,asc
+
+###
+
+GET http://localhost:8080/rest/spruches 
+?page=2&size=4&sort=id,asc
+
+
+###
+GET http://localhost:8080/rest/spruches 
+?page=2&size=2&sort=id,asc
+
+###
+
+GET http://localhost:8080/rest/spruches/findByText/hallo
+
+###
+
+POST http://localhost:8080/rest/spruches/1/tags
+Content-Type: text/uri-list
+
+{"name":"kevin"}

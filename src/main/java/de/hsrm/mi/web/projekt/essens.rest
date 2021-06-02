@@ -10,7 +10,7 @@ GET http://localhost:8080/api/foto/1/kommentar
 
 ###
 
-DELETE http://localhost:8080/api/foto/2/kommentar/2
+DELETE http://localhost:8080/api/foto/1/kommentar/2
 
 ###
 

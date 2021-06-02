@@ -44,7 +44,8 @@ public class Foto {
     private double geobreite;
 
     @JsonIgnore
-    @Lob private byte[] fotodaten;
+    @Lob 
+    private byte[] fotodaten;
 
     @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(cascade = CascadeType.ALL)

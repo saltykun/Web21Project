@@ -33,6 +33,7 @@ public class FotoRestController {
 
     @GetMapping(value="",produces=MediaType.APPLICATION_JSON_VALUE) 
     public List<Foto> getAllFotos()throws JSONException {
+        logger.info("");
         return fService.alleFotosNachZeitstempelSortiert();
     }
 

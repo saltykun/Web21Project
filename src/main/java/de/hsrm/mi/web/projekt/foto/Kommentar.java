@@ -28,12 +28,6 @@ public class Kommentar {
     
     private LocalDateTime zeitpunkt;
 
-    
-    /*
-    public Kommentar(){
-        
-    }
-    */
     public Kommentar(){
         this.autor = "";
         this.text = "";
@@ -45,15 +39,6 @@ public class Kommentar {
         this.text = text;
         zeitpunkt = LocalDateTime.now();
     }
-
-    /*
-    public boolean equals(Kommentar kommentar){
-        if (kommentar.getId() == this.id){
-            return true;
-        }
-        return false;
-    }
-*/
    
     public void setId(long id) {
         this.id = id;
