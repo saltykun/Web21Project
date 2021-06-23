@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>fotos</title>
+    <link rel="stylesheet" href="errors.css" th:href="@{/errors.css}">
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    <h1 th:text="#{header.intro}"></h1>
+    <a th:href="@{?sprache=de}">Deutsch</a>
+    <a th:href="@{?sprache=en}">Englisch</a>
+
+    <form enctype="multipart/form-data" th:action="@{/foto}" th:method="Post">
+        <label for="datei" th:text="#{foto.datei}"></label>
+        <input type="file" name="datei">
+        <input type="submit" th:value="#{button.submit}">
+    </form>
+
+    <table>
+        <tr th:each="foto : ${fotos}">
+            <td th:text="${foto.dateiname}"></td>
+            <td th:text="${foto.zeitstempel}"></td>
+            <td> <img th:src="@{foto/{id}(id=${foto.id})}" width="200" height="auto" alt="bild"></td>
+            <td><a target="_blank" th:href="|https://www.openstreetmap.org/#map=17/${foto.geobreite}/${foto.geolaenge}|" th:text="${foto.ort}">Schlumpfhausen</a></td>
+            <td>
+                <a th:href="@{'/foto/'+${foto.id}+'/del'}" th:text="del"></a>
+                <a th:href="@{'/foto/'+${foto.id}+'/kommentar'}" th:text="#{kommentare.comments}">Schlumpfhausen</a>
+
+                </a>
+
+            </td>
+
+        </tr>
+    </table>
+
+
+
+</body>
+
+</html>

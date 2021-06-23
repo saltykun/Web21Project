@@ -7,16 +7,21 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+//import org.springframework.messaging.handler.annotation.MessageMapping;
+//import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
+import de.hsrm.mi.web.projekt.messaging.FotoMessage;
 import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 
 @Service
 public class FotoServiceImpl implements FotoService{
    @Autowired FotoBearbeitungService fbservice;
    @Autowired FotoRepository fRepository;
-
+   @Autowired SimpMessagingTemplate brooker;
    
+    
     @Override
     public Foto fotoAbspeichern(Foto foto) {
         fbservice.aktualisiereMetadaten(foto);
@@ -24,6 +29,7 @@ public class FotoServiceImpl implements FotoService{
         foto.setOrt(new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge()).get());
         fRepository.save(foto);
         
+        brooker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GESPEICHERT);
         return fRepository.getOne(foto.getId());
 
     }
@@ -45,9 +51,12 @@ public class FotoServiceImpl implements FotoService{
         return fRepository.findAll(Sort.by("zeitstempel"));
     }
 
+    
     @Override
     public void loescheFoto(Long id) {
         fRepository.deleteById(id);
+        brooker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GELOESCHT);
+
     }
 
     @Override

@@ -46,7 +46,8 @@ export default defineComponent({
     }
     
     return {
-      url: require('@/assets/thumbnails/'+ props.foto.dateiname),
+      
+      url: '/foto/'+ props.foto.id,
       delclicked
       //url: require('@/assets/thumbnails/DerTupel.png')
     };

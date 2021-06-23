@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>fotos</title>
+    <link rel="stylesheet" href="errors.css" th:href="@{/errors.css}">
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+    <div>
+        <h1>Kommentare</h1>
+        <a th:href="@{/foto}" th:text="#{kommentare.goback}"></a>
+    </div>
+
+    <p th:text="${foto.dateiname}"></p>
+    <p th:text="${foto.zeitstempel}"></p>
+    <img th:src="@{/foto/{id}(id=${foto.id})}" th:alt="${foto.dateiname}">
+    <p>
+        <a target="_blank" th:href="|https://www.openstreetmap.org/#map=17/${foto.geobreite}/${foto.geolaenge}|" th:text="${foto.ort}">Schlumpfhausen></a>
+    </p>
+
+    <form th:if="(${loggedinusername} != null)" th:action="@{/foto/{id}/kommentar(id=${foto.id})}" th:method="post">
+        <label for="text" th:text="#{kommentare.description}"></label>
+        <input type="text" name="kommentar">
+        <input type="submit" th:value="#{kommentare.submit}">
+    </form>
+
+
+    <h3 th:text="#{kommentare.comments}">Kommentare</h3>
+
+    <p>Test</p>
+    <table>
+        <tr th:each="kommentar : ${kommentare}">
+            <td th:text="${kommentar.zeitpunkt}"></td>
+            <td th:text="${kommentar.autor}"></td>
+            <td th:text="${kommentar.text}"></td>
+
+        </tr>
+    </table>
+
+
+</body>
