@@ -13,6 +13,10 @@
     <a th:href="@{?sprache=de}">Deutsch</a>
     <a th:href="@{?sprache=en}">Englisch</a>
 
+    <form th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="logout" />
+    </form>
+
     <form enctype="multipart/form-data" th:action="@{/foto}" th:method="Post">
         <label for="datei" th:text="#{foto.datei}"></label>
         <input type="file" name="datei">

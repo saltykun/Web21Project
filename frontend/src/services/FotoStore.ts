@@ -7,9 +7,9 @@ const fotostate = reactive({
     fotos: Array<Foto>(),
     errormessage: String("")
  })
- const wsurl = "ws://localhost:9090/messagebroker"; 
- const DEST = "/topic/foto";
- const stompclient = new Client({ brokerURL: wsurl })
+const wsurl = "ws://localhost:9090/messagebroker"; 
+const DEST = "/topic/foto";
+const stompclient = new Client({ brokerURL: wsurl })
 
 
 export function useFotoStore(){
@@ -24,8 +24,10 @@ export function useFotoStore(){
             const messageParsed = JSON.parse(message.body) as FotoMessage
             
         
-            if (messageParsed.operation == "FOTO_GESPEICHERT" || messageParsed.operation== "FOTO_GELOESCHT"){
+            if (messageParsed.operation == "FOTO_GESPEICHERT" || messageParsed.operation == "FOTO_GELOESCHT"){
+                console.log("hallo ich bin hier")
                 updateFotos()
+                deleteFotos(messageParsed.id)
             }
         });     
     };
@@ -50,12 +52,13 @@ export function useFotoStore(){
             fotostate.fotos = jsondata
             console.log("hallo",fotostate.fotos)
         }).catch(fehler =>{
-            fotostate.errormessage = 'Fehler: '+ fehler;
+            fotostate.errormessage = 'Fehler: {$fehler}';
         })
         
     }
     async function deleteFotos(id :number){
-        fetch('api/foto/'+id, { method: 'DELETE'}
+        fetch('api/foto/'+id, { 
+        method: 'DELETE'}
         ).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "error";
             throw new Error('schade'); 
@@ -64,15 +67,13 @@ export function useFotoStore(){
             return response.json(); 
         }
         ).then(jsondata =>{
-            fotostate.fotos  = jsondata
+            fotostate.fotos = jsondata
         }).catch(fehler => {
-            fotostate.errormessage = 'Fehler: '+ fehler})
-
-        
+            fotostate.errormessage = 'Fehler: {$fehler}'})
     }
     
     return {
-        fotostate, updateFotos, deleteFotos
+        fotostate: readonly(fotostate), updateFotos, deleteFotos
     }
 }
 

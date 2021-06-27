@@ -19,7 +19,7 @@ import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 public class FotoServiceImpl implements FotoService{
    @Autowired FotoBearbeitungService fbservice;
    @Autowired FotoRepository fRepository;
-   @Autowired SimpMessagingTemplate brooker;
+   @Autowired SimpMessagingTemplate broker;
    
     
     @Override
@@ -29,7 +29,7 @@ public class FotoServiceImpl implements FotoService{
         foto.setOrt(new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge()).get());
         fRepository.save(foto);
         
-        brooker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GESPEICHERT);
+        broker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GESPEICHERT);
         return fRepository.getOne(foto.getId());
 
     }
@@ -55,7 +55,7 @@ public class FotoServiceImpl implements FotoService{
     @Override
     public void loescheFoto(Long id) {
         fRepository.deleteById(id);
-        brooker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GELOESCHT);
+        broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GELOESCHT);
 
     }
 
