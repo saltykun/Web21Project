@@ -1,6 +1,7 @@
 package de.hsrm.mi.web.projekt.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,12 @@ public class FotoRestController {
     public void delFotoByID(@PathVariable long id)throws JSONException{
         fService.loescheFoto(id);
     }
+    
+    @GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public Foto getFotoByID(@PathVariable long id)throws JSONException{
+        logger.info("_---------_"+ fService.fotoAbfragenNachId(id).get());
+        return fService.fotoAbfragenNachId(id).get();
+    }
 
     @GetMapping(value="/{id}/kommentar", produces=MediaType.APPLICATION_JSON_VALUE)
     public List<Kommentar> getAllKommentsFromFotowithID(@PathVariable long id)throws JSONException {
@@ -53,5 +60,6 @@ public class FotoRestController {
     @PathVariable long kid)throws JSONException{
         fService.fotoKommentarLoeschen(id, kid);
     }
+    
 
 }

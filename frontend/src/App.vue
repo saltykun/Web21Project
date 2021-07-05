@@ -14,7 +14,7 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <a href="/logout" class="navbar-item">Logout</a>
+            <a href="/Login/Logout" class="navbar-item">Logout</a>
           </div>
         </div>
       </nav>

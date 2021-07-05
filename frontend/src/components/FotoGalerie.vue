@@ -2,7 +2,7 @@
   <div class="container">
     
     <!-- Ist irgendwie Komsisch-->
-    <div v-if="fotostate.errormessage!=''" class="notification is-danger">{{errormessage}}</div>
+    <div v-if="fotostate.errormessage!=''" class="notification is-danger">{{fotostate.errormessage}}</div>
     
     <h1>{{ msg }}</h1>
     <!-- Button zum Hinzufügen des nächsten Bildes -->

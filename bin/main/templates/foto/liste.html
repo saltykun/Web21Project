@@ -12,7 +12,7 @@
     <h1 th:text="#{header.intro}"></h1>
     <a th:href="@{?sprache=de}">Deutsch</a>
     <a th:href="@{?sprache=en}">Englisch</a>
-
+    <p th:text="${benutzername}"></p>
     <form th:action="@{/logout}" th:method="POST">
         <input type="submit" value="logout" />
     </form>

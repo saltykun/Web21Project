@@ -27,18 +27,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .withUser("joghurta")
         .password(pwenc.encode("geheim123"))
         .roles("PHOTOGRAPH");
+        authmanagerbuilder 
+        .userDetailsService(new FotoUserDetailsService()) 
+        .passwordEncoder(passwordEncoder());
+
+    
     }
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-        .antMatchers("/api/foto").permitAll()
-        .antMatchers("/api/foto/1").permitAll()
-        .antMatchers("/api/foto/{id}/kommentar").permitAll()
-        .antMatchers("/api/foto/{id}/kommentar/{kid}").permitAll()
+        .antMatchers("/api/**").permitAll()
         .antMatchers("/messagebroker").permitAll()
+        .antMatchers("/h2-console/**").permitAll()
         //.antMatchers("/register", "/logout").permitAll() 
-        .antMatchers(HttpMethod.DELETE).permitAll()
-        //.antMatchers(HttpMethod.PUT, "/bag").hasRole("ADMIN") 
-        .antMatchers("/user*", "/user/*").authenticated() 
+        .antMatchers(HttpMethod.GET, "/foto/{id}").permitAll()        
+        .antMatchers(HttpMethod.GET, "/foto/{id}/del").hasRole("PHOTOGRAPH") 
+        .antMatchers(HttpMethod.POST, "/foto").hasRole("PHOTOGRAPH") 
+        //.antMatchers("/user*", "/user/*").authenticated() 
         
         .anyRequest().hasAnyRole("GUCKER", "PHOTOGRAPH")
         .and() 
@@ -50,6 +54,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //.logout()
         //.logoutUrl("/logout") // ist auch Default .logoutSuccessUrl("/")
         //.permitAll();
+        http.csrf()
+        .ignoringAntMatchers("/h2-console/**")
+        .ignoringAntMatchers("/api/**");
+        http.headers().frameOptions().disable();
+
+        
     }
     
 }

@@ -4,6 +4,7 @@ package de.hsrm.mi.web.projekt.foto;
 import java.io.IOException;
 //mport java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class FotoController {
     public static final String UPLOADDIR = "/tmp";
     Logger logger = LoggerFactory.getLogger(FotoController.class);
-
     @Autowired 
     FotoService fService;
 
@@ -60,9 +60,12 @@ public class FotoController {
         return"foto/liste";
     }
     @GetMapping("/foto")
-    public String fotoGet(Model m, @ModelAttribute("fotos") List<Foto> flist//,
+    public String fotoGet(Model m, @ModelAttribute("fotos") List<Foto> flist, Principal prinz
     //@ModelAttribute("loggedinusername") String username
     ){
+        String loginname = prinz.getName();
+        logger.info("-------Benutzername-----"+ loginname);
+        m.addAttribute("benutzername", loginname);
         m.addAttribute("fotos", fService.alleFotosNachZeitstempelSortiert());
         //if(username == null){
          //   return "foto/liste";
@@ -96,17 +99,27 @@ public class FotoController {
     }  
     @PostMapping("/foto/{id}/kommentar")
     public String postfotoIDKommentar(Model m, @PathVariable Long id, 
-    @RequestParam("kommentar") String kommentar
+    @RequestParam("kommentar") String kommentar, Principal prinz
     //@ModelAttribute("kommentare") List<Kommentar> kommentare
     ){
         Object o = m.getAttribute("loggedinusername");
+        String benutzername = prinz.getName();
         if(o!= null){
             String username = o.toString();
             if(!username.equals("") && username != null){
             
                 fService.fotoKommentieren(id, username, kommentar);
             
+            }else{
+                logger.info("Username" + benutzername);
+                fService.fotoKommentieren(id, benutzername, kommentar);
             }
+            
+        }else{
+            
+            logger.info("Username" + benutzername);
+            fService.fotoKommentieren(id, benutzername, kommentar);
+
         }
         return"redirect:/foto/"+id+"/kommentar";
 

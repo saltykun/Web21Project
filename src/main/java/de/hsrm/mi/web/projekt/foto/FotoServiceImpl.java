@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+//import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -17,6 +21,8 @@ import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 
 @Service
 public class FotoServiceImpl implements FotoService{
+    Logger logger = LoggerFactory.getLogger(FotoServiceImpl.class);
+
    @Autowired FotoBearbeitungService fbservice;
    @Autowired FotoRepository fRepository;
    @Autowired SimpMessagingTemplate broker;
@@ -29,7 +35,7 @@ public class FotoServiceImpl implements FotoService{
         foto.setOrt(new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge()).get());
         fRepository.save(foto);
         
-        broker.convertAndSend("/topic/foto" , FotoMessage.FOTO_GESPEICHERT);
+        broker.convertAndSend("/topic/foto" , new FotoMessage(FotoMessage.FOTO_GESPEICHERT, foto.getId()));
         return fRepository.getOne(foto.getId());
 
     }
@@ -37,7 +43,7 @@ public class FotoServiceImpl implements FotoService{
     @Override
     public Optional<Foto> fotoAbfragenNachId(Long id) {
     
-        return Optional.of(fRepository.getOne(id));
+        return Optional.of(fRepository.findById(id).get());
     }
 
     @Override
@@ -55,8 +61,7 @@ public class FotoServiceImpl implements FotoService{
     @Override
     public void loescheFoto(Long id) {
         fRepository.deleteById(id);
-        broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GELOESCHT);
-
+        broker.convertAndSend("/topic/foto", new FotoMessage(FotoMessage.FOTO_GELOESCHT, id));
     }
 
     @Override

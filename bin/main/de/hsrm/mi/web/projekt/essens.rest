@@ -2,6 +2,10 @@ GET http://localhost:9090/api/foto
 
 ###
 
+GET http://localhost:9090/api/foto/1
+
+###
+
 DELETE http://localhost:9090/api/foto/1
 
 ###

@@ -10,13 +10,20 @@
         <i class="fa fa-times" />
       </button>
     </div>
+    
     <div class="card-content has-text-centered">
-      <!-- Bild anzeigen -->
-      <figure class="image is-inline-block">
-        <img :src="url" />
-      </figure>
+        <div class="navbar-menu is-active">
+          <!-- Bild anzeigen -->
+          <router-link :to="{name:'FotoDetailView', params: {fotoid: foto.id} }">
+            <figure class="image is-inline-block">
+              <img :src="url" />
+            </figure>
+          </router-link>
+        </div>
+      
       <div class="content">
         <foto-star-rating :maxsterne="5" />
+
       </div>
       <!-- Ort -->
       <div class="content" >{{foto.ort}}</div>
@@ -47,7 +54,7 @@ export default defineComponent({
     
     return {
       
-      url: '/foto/'+ props.foto.id,
+      url: 'foto/'+ props.foto.id,
       delclicked
       //url: require('@/assets/thumbnails/DerTupel.png')
     };
