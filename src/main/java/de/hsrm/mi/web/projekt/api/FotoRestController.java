@@ -45,7 +45,7 @@ public class FotoRestController {
     
     @GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public Foto getFotoByID(@PathVariable long id)throws JSONException{
-        logger.info("_---------_"+ fService.fotoAbfragenNachId(id).get());
+        //logger.info("_---------_"+ fService.fotoAbfragenNachId(id).get());
         return fService.fotoAbfragenNachId(id).get();
     }
 

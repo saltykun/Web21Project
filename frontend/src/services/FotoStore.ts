@@ -2,12 +2,14 @@ import { reactive, readonly } from "vue";
 import { Foto } from "./Foto";
 import { Client, Message } from '@stomp/stompjs';
 import { FotoMessage } from "./FotoMessage";
+import { useLoginStore } from "./LoginStore";
 
 const fotostate = reactive({
     fotos: Array<Foto>(),
     errormessage: String("")
  })
-
+ const {loginstate, doLogout, doLogin} = useLoginStore();
+ 
 
 
 export function useFotoStore(){
@@ -35,7 +37,7 @@ export function useFotoStore(){
         fetch('/api/foto', {
             method: 'GET',
             headers: {
-
+                'Authorization': 'Bearer' + loginstate.jwttoken
             }, 
         }).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "error";
@@ -46,16 +48,21 @@ export function useFotoStore(){
         }).then(jsondata => {
             console.log("asdf")
             fotostate.fotos = jsondata
+            fotostate.errormessage = ""
+
             console.log("hallo",fotostate.fotos)
         }).catch(fehler =>{
             fotostate.errormessage = 'Fehler: '+ fehler;
         })
         
     }
-    async function deleteFotos(id :number){
+    function deleteFotos(id :number){
         fetch('api/foto/'+ id, { 
-        method: 'DELETE'}
-        ).then( (response) => { if (!response.ok) {
+        method: 'DELETE',
+        headers: {
+            'Authorization':'Bearer' + loginstate.jwttoken
+        },
+        }).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "error";
             throw new Error('schade'); 
             }

@@ -6,26 +6,33 @@
 
     <img :src="url" />
     
+    <p>{{foto.ort}}</p>
+
+    <router-link to="/">
+    <button class="button - is-primary">Zurück</button>
+    </router-link>
+
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { defineComponent, PropType } from 'vue'
 import { useFotoStore } from "@/services/FotoStore";
-import { Foto } from '@/services/Foto';
+//import { Foto } from '@/services/Foto';
 
 
 export default defineComponent({
+    name: "FotoDeteilView",
     props : {
         fotoid :{type : String, required: true }
     },
 
     setup(props){
         console.log("fotoid", props.fotoid)
-        const {fotostate , updateFotos, deleteFotos} = useFotoStore()
+        const {fotostate} = useFotoStore()
         return {
             foto : fotostate.fotos.find(e => e.id == parseInt(props.fotoid)), 
-            url: '/foto/'+parseInt(props.fotoid)   
+            url: '/foto/' + parseInt(props.fotoid)   
         }
     }
 })

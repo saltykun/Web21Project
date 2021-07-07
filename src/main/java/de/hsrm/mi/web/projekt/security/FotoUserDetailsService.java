@@ -4,7 +4,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FotoUserDetailsService implements UserDetailsService{
     @Autowired(required = true) private FotoUserRespository fUserRespository;
     @Autowired PasswordEncoder encoder;

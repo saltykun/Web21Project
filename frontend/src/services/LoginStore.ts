@@ -2,7 +2,7 @@ import { reactive, readonly } from "vue";
 
 const loginstate = reactive({
     username : String(""),
-    jwttocken :String(""),
+    jwttoken :String(""),
     errormessage : String(""),
     isLoggedIn : Boolean(false) 
 })
@@ -10,7 +10,7 @@ const loginstate = reactive({
 export function useLoginStore(){
 
     function doLogout(){
-        loginstate.jwttocken = "";
+        loginstate.jwttoken = "";
         loginstate.username = "";
         loginstate.errormessage = "";
         loginstate.isLoggedIn = false;
@@ -18,33 +18,32 @@ export function useLoginStore(){
     
     async function doLogin(username: string, password: string): Promise<boolean>{
         const userobj = { username: username, password: password};
-        fetch('/api/login',{
+        const credentials = btoa('${username, passwort}')
+        
+        const response = await fetch('/api/login',{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic '
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userobj)
-        }).then( (response) => { if (!response.ok) {
-            loginstate.errormessage = "error";
-            throw new Error('schade'); 
-        }
-            return response.text(); 
-        }).then(jsondata => {
+            body: JSON.stringify(userobj),
+        });
+        if(!response.ok){
+            console.log("Da lief was schief")
+            
+            doLogout()
+            loginstate.isLoggedIn = false
+            loginstate.errormessage = ("Das Einloggen hat leider nicht Geklappt, du Looser !!!!") 
+        }else{
+            console.log("es hat geklappt")
+            const jsondata = await response.text();
             loginstate.username = username
-            loginstate.jwttocken = jsondata
+            loginstate.jwttoken = jsondata
             loginstate.isLoggedIn = true
             loginstate.errormessage = ""
-        }).catch(fehler => {
-            doLogout()
-            loginstate.errormessage = 'Fehler: '+ fehler
-            console.log("DAS EINLOGGEN HAT NICHT GEKLAPPT")
-            return false
-        })
-        console.log("DAS EINLOGGEN HAT GEKLAPPT")
-
-        return true;    
+        }
+        return loginstate.isLoggedIn;
     }
+    
     return {
         loginstate: readonly(loginstate), doLogin, doLogout
     }
