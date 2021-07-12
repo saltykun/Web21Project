@@ -37,7 +37,7 @@ export function useFotoStore(){
         fetch('/api/foto', {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer' + loginstate.jwttoken
+                'Authorization': 'Bearer ' + loginstate.jwttoken
             }, 
         }).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "error";
@@ -60,7 +60,7 @@ export function useFotoStore(){
         fetch('api/foto/'+ id, { 
         method: 'DELETE',
         headers: {
-            'Authorization':'Bearer' + loginstate.jwttoken
+            'Authorization':'Bearer ' + loginstate.jwttoken
         },
         }).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "error";
